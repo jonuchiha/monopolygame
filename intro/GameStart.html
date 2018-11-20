@@ -1,0 +1,122 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body style="text-align:center;">
+	<a href="../game.php">
+  <img src="../img/propertytlogo.png" width="1000px"></img>
+</a>
+  <script>
+  var t = 0;
+	$( document ).ready(function() {
+	
+		$("#goicon").hide();
+		$("#start").attr("src","1x.png");	
+		backgroundLeft = 0;
+		backgroundTop = 150;
+		windowWidth = $(window).width();
+		if(windowWidth > 1680){
+			backgroundLeft = (windowWidth/2)-(1680/2);
+		}else{
+			backgroundLeft = 0;
+		}
+		$("#start").css({top: backgroundTop, left: backgroundLeft, position:'absolute'});
+		$("goicon").hide();
+		i = 1;
+		y = 0;
+		x = 0;
+		
+		
+		
+		$( "#goicon" ).click(function() {			
+		  window.location.href='../game.php';
+		});
+	});
+	$( window ).resize(function() {
+		
+		windowWidth = $(window).width();
+		scalar = windowWidth/1520;
+		if(windowWidth > 1680){
+			backgroundLeft = (windowWidth/2)-(1680/2);
+			$("#goicon").css({top: backgroundTop + 460, left: backgroundLeft + 450, position:'absolute'});
+			$("#goicon").css({'width' : 115});
+		}else{
+			backgroundLeft = 0;
+			$("#start").css({'width' : windowWidth});
+			$("#goicon").css({top: backgroundTop + 460*scalar, left: backgroundLeft + 450*scalar, position:'absolute'});
+			$("#goicon").css({'width' : 115*scalar});
+		}
+		$("#start").css({top: backgroundTop, left: backgroundLeft, position:'absolute'});
+		
+		
+	});
+    
+	setInterval(function(){ 
+		windowWidth = $(window).width();
+		scalar = windowWidth/1520;
+		if(windowWidth > 1680){
+			backgroundLeft = (windowWidth/2)-(1680/2);
+			$("#goicon").css({top: backgroundTop + 460, left: backgroundLeft + 450, position:'absolute'});
+		}else{
+			backgroundLeft = 0;
+			$("#start").css({'width' : windowWidth});
+			$("#goicon").css({top: backgroundTop + 460*scalar, left: backgroundLeft + 450*scalar, position:'absolute'});
+		}
+		$("#start").css({top: backgroundTop, left: backgroundLeft, position:'absolute'});
+		
+		$("#goicon").css({'width' : 115*scalar});
+		if(y > 5){
+			if((i < 14)&&(i > 0)){
+				i++;
+			} else{
+				if((i < 20)&&(i > 0)){
+					i++;
+				}
+			}
+			if(i == -1){
+				$( "p" ).html("Press Go to start the game!!!!");
+				$("#start").attr("src","go.png");
+				windowWidth = $(window).width();
+				if(windowWidth > 1680){
+					$("#goicon").css({top: backgroundTop + 460, left: backgroundLeft + 450, position:'absolute'});
+				}else{
+					$("#goicon").css({top: backgroundTop + 460*scalar, left: backgroundLeft + 450*scalar, position:'absolute'});
+				}
+				if(t < 4){
+					if(x == 0){
+						$("#goicon").show();
+						x = 1;
+						t++;
+									
+					}else{
+						$("#goicon").hide();
+						x = 0;
+						t++;
+					}
+				}else{
+					$("#goicon").show();
+				}
+			}else{
+				if(i < 15){
+					$("#start").attr("src",i+"x.png");
+				}else if(i<20){
+					$("#start").attr("src","14x.png");
+				}else{
+					i = -1;
+				}
+			}
+		}else{
+			y++;
+		}
+	}, 500);
+	
+  </script>
+
+ 
+
+</body>
+
+<img id="start"src="1x.png">
+<img id="goicon"src="goicon.png" top:480px; left:450px;">
+</html>
